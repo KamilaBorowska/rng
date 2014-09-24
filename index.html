@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>Random number generator</title>
+<input type=button value=Generate>
+<style>
+html, body {
+    margin: 0px;
+}
+input {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    font-size: 96px;
+}
+</style>
+<script>
+var inputButton = document.getElementsByTagName('input')[0]
+function inputClick() {
+    var randomValue
+    if (window.crypto) {
+        var buf = new Uint8Array(1);
+        window.crypto.getRandomValues(buf)
+        randomValue = 1 + (buf[0] & 3);
+    }
+    else {
+        randomValue = 1 + Math.floor(Math.random() * 4)
+    }
+    var random = 'Move: ' + randomValue
+    inputButton.setAttribute('value', random)
+}
+inputButton.onclick = inputClick
+inputClick()
+</script>
